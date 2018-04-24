@@ -14,8 +14,6 @@ public interface NNFFInterface {
     public double[] feedForward(double... inputs);
     public void train(double[][] inputs, double[][] targets, double lr);
     public int[] getLayersSize();
-    public double[] getDNA();
-    public void fromDNA(double[] dna);
     public void save(String directory);
     public abstract NNFFInterface load(String directory);
     public NNFFInterface copy();

@@ -27,19 +27,8 @@ public class MyNeuralNetwork {
 //            //"D:\\Projetos\\Programação\\JAVA\\NeuralNetwork\\sqc_image",
 //            //"D:\\Projetos\\Programação\\JAVA\\NeuralNetwork\\sqc_label"    
 //        );
-        Count cnt = new Count();
-        Count cnt2 = null;
-        while(true){
-            if (Number.number == 3 && cnt2 == null) cnt2 = new Count();
-            System.out.println(Number.number);
-        }
-        
     }
     
-    public static class Number{
-        public static int number = 0;
-    }
-
     static class Data {
 
         public static DataSet MNISTData(String directoryImages, String directorylabels) {
