@@ -118,7 +118,7 @@ public class NNMatrix implements NNFFInterface{
     }
     
     @Override
-    public double[] getDNA(){
+    public double[] getGenome(){
         double[] dna = new double[dnaSize];
         int index = 0;
         for (Matrix b : bias) {
@@ -139,12 +139,12 @@ public class NNMatrix implements NNFFInterface{
     }
     
     @Override
-    public void fromDNA(double[] dna){
+    public NNMatrix fromGenome(double[] genome){
         int index = 0;
         for (Matrix b : bias) {
             double[] matrix = new double[b.cols * b.rows];
             for (int j = 0; j < matrix.length; j++){
-                matrix[j] = dna[index];
+                matrix[j] = genome[index];
                 index++;
             }
             b.fromArray(matrix);
@@ -152,11 +152,12 @@ public class NNMatrix implements NNFFInterface{
         for (Matrix w : weights) {
             double[] matrix = new double[w.cols * w.rows];
             for (int j = 0; j < matrix.length; j++){
-                matrix[j] = dna[index];
+                matrix[j] = genome[index];
                 index++;
             }
             w.fromArray(matrix);
         }
+        return this;
     }
     
     @Override
@@ -171,7 +172,7 @@ public class NNMatrix implements NNFFInterface{
         for (int i = 0; i < layers.length; i++){
             xml.addAttribute("layer_"+i, Integer.toString(layers[i]));
         }
-        xml.setData(getDNA());
+        xml.setData(getGenome());
         try {
             xml.save(directory);
         } catch (TransformerException ex) {
@@ -193,14 +194,14 @@ public class NNMatrix implements NNFFInterface{
             layers[i] = Integer.parseInt(xml.getAttribute("layer_"+i));
         }
         NNMatrix nn = new NNMatrix(layers);
-        nn.fromDNA(xml.getData());
+        nn.fromGenome(xml.getData());
         return nn;
     }
     
     @Override
     public NNMatrix copy(){
         NNMatrix nn = new NNMatrix(layers);
-        nn.fromDNA(getDNA());
+        nn.fromGenome(getGenome());
         return nn;
     }
 
